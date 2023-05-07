@@ -113,11 +113,11 @@ class jadwalDefaultController extends Controller
             return response('Jadwal Instruktur Bertabrakan', 400);
         }
 
-        $newJadwal->ID_KELAS = $request->input('ID_KELAS');
         $newJadwal->ID_INSTRUKTUR = $request->input('ID_INSTRUKTUR');
+        $newJadwal->ID_KELAS = $request->input('ID_KELAS');
         $newJadwal->ID_USER = $request->input('ID_USER');
-        $newJadwalDefault->HARI_JADWAL_DEFAULT = $request->input('HARI_JADWAL_DEFAULT');
         $newJadwal->SESI_JADWAL = $request->input('SESI_JADWAL');
+        $newJadwalDefault->HARI_JADWAL_DEFAULT = $request->input('HARI_JADWAL_DEFAULT');
 
         $newJadwal->update();
         $newJadwalDefault->update();

@@ -18,5 +18,6 @@ class jadwal_harian extends Model
         'ID_JADWAL',
         'ID_JADWAL_HARIAN',
         'TANGGAL_JADWAL_HARIAN',
+        'STATUS'
     ];
 }
