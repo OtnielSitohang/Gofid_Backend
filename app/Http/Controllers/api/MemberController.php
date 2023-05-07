@@ -44,10 +44,12 @@ class MemberController extends Controller
         $data = $request->json()->all();
         $member_temp = DB::select("SELECT ID_MEMBER FROM member ORDER BY ID_MEMBER desc limit 1 ");
         $id_temp = Str::substr($member_temp[0]->ID_MEMBER, 1);
-        // $id =  "I". $id_temp+1; 
         $idBaru = (int)substr($id_temp, 6) + 1;
+        // $idBaru = date('y') . "." . date('m') . "."."$idBaru";
+        $idBaru = date('y') . "." . date('m') . ".".str_pad((string) $idBaru, 3, '0', STR_PAD_LEFT);
+        // $threeDigitString = str_pad((string) $number, 3, '0', STR_PAD_LEFT);
+        // $id =  "I". $id_temp+1; 
         // $idBaru = $idBaru + 1;
-        $idBaru = date('y') . "." . date('m') . "."."$idBaru";;
         
 
         $ID_USER = $client->generateId($size = 21);

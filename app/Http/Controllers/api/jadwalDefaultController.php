@@ -21,7 +21,9 @@ class jadwalDefaultController extends Controller
         ->join('kelas' , 'kelas.ID_KELAS', '=' , 'jadwal.ID_KELAS')
         ->where('IS_DELETED_JADWAL', NULL)
         ->where ('IS_DELETED_JADWAL_DEFAULT', NULL) 
+        ->orderBy('HARI_JADWAL_DEFAULT', 'asc')
         ->get();
+ 
         
         if(count($jadwal_default) > 0)
         {
@@ -47,37 +49,15 @@ class jadwalDefaultController extends Controller
         return response(200);
     }
 
+    private function isJadwalConflicting($ID_INSTRUKTUR, $HARI_JADWAL_DEFAULT, $SESI_JADWAL){
+        $JadwalConflict = DB::select('SELECT j.*, hari_jadwal_default FROM jadwal j join jadwal_default jd on j.id_jadwal = jd.id_jadwal WHERE ID_INSTRUKTUR = ? AND HARI_JADWAL_DEFAULT = ? AND SESI_JADWAL = ?', [$ID_INSTRUKTUR, $HARI_JADWAL_DEFAULT, $SESI_JADWAL]);
+        return count($JadwalConflict)>0;
+        // var_dump($isJadwalConflicting);exit;
+    }
+    
     public function store(Request $request){
 
-        // {
-
-        //     $validator = Validator::make($request->all(), [
-        //         'ID_KELAS' => 'required',
-        //         'ID_USER' => 'required',
-        //         'ID_INSTRUKTUR' => 'unique:jadwal__umums,id_instruktur,NULL,id_jadwal_umum,id_instruktur,' 
-        //         . $request->id_instruktur. ',hari_jadwal_umum,' 
-        //         . $request->hari_jadwal_umum . ',jam_jadwal_umum,' 
-        //         .$request->jam_jadwal_umum,
-
-        //         'SESI_JADWAL' => 'required'
-        //         'HARI_JADWAL_DEFAULT' => 'required'
-        //     ],
-        //     [   'id_instruktur.required' => 'Tidak Boleh Kosong!',
-        //         'id_instruktur.unique' => 'Jadwal Instruktur Bertabrakan!']);
-        //     if ($validator->fails()) {
-        //         return response()->json($validator->errors(), 422);
-        //     }
-        //      //Fungsi Simpan Data ke dalam Database
-        //      $jadwal_umum = Jadwal_Umum::create([
-        //         'hari_jadwal_umum' => $request->hari_jadwal_umum,
-        //         'id_kelas' => $request->id_kelas,
-        //         'id_instruktur' => $request->id_instruktur,
-        //         'jam_jadwal_umum' => $request->jam_jadwal_umum
-        //     ]);
-    
-        //     return new JadwalUmumResource(true, 'Data Jadwal Umum Berhasil Ditambahkan!', $jadwal_umum);
-        // }
-    
+        
         $client = new Client();
         $data = $request->json()->all();
         $ID_JADWAL = $client->generateId($size = 21);
@@ -92,14 +72,19 @@ class jadwalDefaultController extends Controller
         $postJadwalDefault['ID_JADWAL'] = $ID_JADWAL;
         $postJadwalDefault['ID_JADWAL_DEFAULT'] = $ID_JADWAL_DEFAULT;
         $postJadwalDefault['HARI_JADWAL_DEFAULT'] = $data['HARI_JADWAL_DEFAULT'];
+        
 
+        if ($this->isJadwalConflicting($postJadwal['ID_INSTRUKTUR'], $postJadwalDefault['HARI_JADWAL_DEFAULT'], $postJadwal['SESI_JADWAL'])) {
+            return response('Jadwal Instruktur Bertabrakan', 400);
+        }
+        
         jadwal::create([
             'ID_JADWAL' => $postJadwal['ID_JADWAL'],
             'ID_KELAS' => $postJadwal['ID_KELAS'],
             'JAD_ID_JADWAL' => $postJadwal['JAD_ID_JADWAL'],
             'ID_USER' => $postJadwal['ID_USER'],
             'ID_INSTRUKTUR' => $postJadwal['ID_INSTRUKTUR'],
-            'SESI_JADWAL'=> $postJadwal['SESI_JADWAL'],
+            'SESI_JADWAL' => $postJadwal['SESI_JADWAL'],
         ]);
 
         jadwal_default::create([
@@ -109,27 +94,30 @@ class jadwalDefaultController extends Controller
         ]);
 
         $jadwalAlias = jadwal::join('jadwal_default', 'jadwal.ID_JADWAL', '=', 'jadwal_default.ID_JADWAL')
-        ->where('jadwal_default.IS_DELETED_JADWAL_DEFAULT', NULL)
-        ->where('jadwal.IS_DELETED_JADWAL', NULL) 
-        ->where('jadwal.ID_JADWAL', $postJadwal["ID_JADWAL"])
-        ->get()[0];
+            ->where('jadwal_default.IS_DELETED_JADWAL_DEFAULT', NULL)
+            ->where('jadwal.IS_DELETED_JADWAL', NULL)
+            ->where('jadwal.ID_JADWAL', $postJadwal['ID_JADWAL'])
+            ->get()[0];
+
         return response()->json($jadwalAlias);
-    }
+    }        
 
     public function update(Request $request, $ID_JADWAL)
     {
-
         $input = $request->all();
         $newJadwal = jadwal::find($ID_JADWAL);
-        // $newJadwalDefault = jadwal::find($ID_JADWAL);
-        $newJadwalDefault = jadwal_default::find($ID_JADWAL);
         // var_dump($newJadwal);exit;
+        $newJadwalDefault = jadwal_default::find($ID_JADWAL);
+
+        if ($this->isJadwalConflicting($request['ID_INSTRUKTUR'], $request['HARI_JADWAL_DEFAULT'], $request['SESI_JADWAL'])) {
+            return response('Jadwal Instruktur Bertabrakan', 400);
+        }
+
         $newJadwal->ID_KELAS = $request->input('ID_KELAS');
         $newJadwal->ID_INSTRUKTUR = $request->input('ID_INSTRUKTUR');
         $newJadwal->ID_USER = $request->input('ID_USER');
         $newJadwalDefault->HARI_JADWAL_DEFAULT = $request->input('HARI_JADWAL_DEFAULT');
         $newJadwal->SESI_JADWAL = $request->input('SESI_JADWAL');
-        //$newJadwal->USER_FOTO = $request->input('USER_FOTO');
 
         $newJadwal->update();
         $newJadwalDefault->update();

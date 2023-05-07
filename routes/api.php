@@ -55,9 +55,11 @@ Route::get('/jadwal', [App\Http\Controllers\api\jadwalController::class, 'index'
 Route::get('/jadwal_default', [App\Http\Controllers\api\jadwalDefaultController::class, 'index']);
 Route::delete('/jadwal_default/destroy/{ID_JADWAL}', [App\Http\Controllers\api\jadwalDefaultController::class, 'destroy']);
 Route::post('/jadwal_default/create', [App\Http\Controllers\api\jadwalDefaultController::class, 'store']);
-Route::put('/jadwal_default/{ID_USER}', [App\Http\Controllers\api\jadwalDefaultController::class, 'update']);
+Route::put('/jadwal_default/update/{ID_USER}', [App\Http\Controllers\api\jadwalDefaultController::class, 'update']);
+
+//Jadwal Harian
+Route::get('/jadwalHarian', [App\Http\Controllers\api\JadwalHarianController::class, 'index']);
 
 
 //Kelas
 Route::get('/kelas', [App\Http\Controllers\api\KelasController::class, 'index']);
-
