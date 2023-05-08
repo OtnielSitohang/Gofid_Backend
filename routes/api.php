@@ -25,6 +25,11 @@ Route::get('/user', [App\Http\Controllers\api\UserController::class, 'index']);
 Route::get('/pegawai', 'App\Http\Controllers\api\PegawaiController@index');
 
 
+//Promo
+Route::get('/promo', [App\Http\Controllers\api\PromoController::class, 'index']);
+
+
+
 //Instruktur
 Route::get('/instruktur', [App\Http\Controllers\api\InstrukturController::class, 'index']);
 Route::post('/instruktur/create', [App\Http\Controllers\api\InstrukturController::class, 'store']);
@@ -68,3 +73,8 @@ Route::get('/kelas', [App\Http\Controllers\api\KelasController::class, 'index'])
 
 //Membership
 Route::get('/membership', [App\Http\Controllers\api\MembershipController::class, 'index']);
+
+
+//Transakti Deposite Uang
+Route::post('/depositeUang', [App\Http\Controllers\api\DepositUangController::class, 'store']);
+Route::get('/indexDepositeUang', [App\Http\Controllers\api\DepositUangController::class, 'index']);
