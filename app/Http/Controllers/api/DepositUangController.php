@@ -19,19 +19,8 @@ class DepositUangController extends Controller
 {
 
     public function index(){
-    //    $deposit_uang = DepositUang::select('user.ID_USER', 'member.ID_MEMBER', 'promo.ID_PROMO', 'pegawai.ID_PEGAWAI')
-    //    ->join('user' , 'user.ID_USER', '=' , 'deposit_uang.MEM_ID_USER', 'left outer')
-    //    ->join('member' , 'member.ID_MEMBER', '=' , 'deposit_uang.ID_MEMBER' ,'left outer')   
-    //    ->join('promo' , 'promo.ID_PROMO', '=' , 'deposit_uang.ID_PROMO', 'left outer')
-    //    ->join('user' , 'user.ID_USER', '=' , 'deposit_uang.PEG_ID_USER', 'left outer')
-    //    ->join('pegawai' , 'pegawai.ID_USER', '=' , 'deposit_uang.ID_PEGAWAI', 'left outer')
-    //    ->where('IS_DELETED_USER', NULL)
-    //    ->get();
-
     $deposit_uang = DepositUang::get();
     return response()->json(['data' => $deposit_uang]);
-
-
        if(count($deposit_uang) > 0)
         {
             return response()->json([

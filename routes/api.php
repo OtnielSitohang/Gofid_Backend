@@ -71,6 +71,11 @@ Route::post('/jadwalHariangenerate', [App\Http\Controllers\api\JadwalHarianContr
 //Kelas
 Route::get('/kelas', [App\Http\Controllers\api\KelasController::class, 'index']);
 
+
+//Aktivasi Tahunan
+Route::get('/aktivasi', [App\Http\Controllers\api\AktivasiTahunanController::class, 'index']);
+Route::post('/aktivasi/create', [App\Http\Controllers\api\AktivasiTahunanController::class, 'store']);
+
 //Membership
 Route::get('/membership', [App\Http\Controllers\api\MembershipController::class, 'index']);
 
@@ -78,3 +83,8 @@ Route::get('/membership', [App\Http\Controllers\api\MembershipController::class,
 //Transakti Deposite Uang
 Route::post('/depositeUang', [App\Http\Controllers\api\DepositUangController::class, 'store']);
 Route::get('/indexDepositeUang', [App\Http\Controllers\api\DepositUangController::class, 'index']);
+
+
+//Transakti Deposite Kelas
+Route::post('/depositeKelas/store', [App\Http\Controllers\api\DepositeKelasController::class, 'store']);
+Route::get('/indexDepositeKelas', [App\Http\Controllers\api\DepositeKelasController::class, 'index']);

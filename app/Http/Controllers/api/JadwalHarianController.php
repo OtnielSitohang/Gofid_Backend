@@ -64,7 +64,8 @@ class JadwalHarianController extends Controller
         
         //generate
         $start_date = Carbon::now()->startOfWeek(Carbon::SUNDAY)->addDay();
-        $end_date = Carbon::now()->startOfWeek(Carbon::SUNDAY)->addDays(7);
+        // $end_date = Carbon::now()->startOfWeek(Carbon::SUNDAY)->addDays(7);
+        $end_date = Carbon::now()->endOfWeek(Carbon::SUNDAY);
         
         //Mapping Hari
         $map = [
@@ -95,6 +96,7 @@ class JadwalHarianController extends Controller
                 if(!$jadwal_harian){
                     DB::table('jadwal_harian')->insert([
                         'ID_JADWAL_HARIAN' => $ID_JADWAL,
+                        'HARI_JADWAL_HARIAN' => $jd->HARI_JADWAL_DEFAULT,
                         'TANGGAL_JADWAL_HARIAN' =>$date->toDateString(),
                         'status' => 0,
                         'ID_JADWAL' =>$jd->ID_JADWAL,   
