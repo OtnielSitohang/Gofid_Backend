@@ -88,3 +88,7 @@ Route::get('/indexDepositeUang', [App\Http\Controllers\api\DepositUangController
 //Transakti Deposite Kelas
 Route::post('/depositeKelas/store', [App\Http\Controllers\api\DepositeKelasController::class, 'store']);
 Route::get('/indexDepositeKelas', [App\Http\Controllers\api\DepositeKelasController::class, 'index']);
+
+//TiZIN INTRUKTUR
+Route::get('/ijininstruktur', [App\Http\Controllers\api\IjinInstrukturController::class, 'index']);
+Route::put('/ijininstruktur/{ID_JADWAL}', [App\Http\Controllers\api\IjinInstrukturController::class, 'update']);
