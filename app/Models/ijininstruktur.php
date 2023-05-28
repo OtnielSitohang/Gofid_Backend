@@ -20,6 +20,7 @@ class ijininstruktur extends Model
         'INS_ID_USER',
         'ID_INSTRUKTUR_PENGGANTI',
         'INS_PENGGANTI_ID_USER',
+        'ID_JADWAL',
         'HARI_IZIN',
         'TANGGAL_IZIN',
         'TANGGAL_PENGAJUAN_IZIN',

@@ -92,3 +92,15 @@ Route::get('/indexDepositeKelas', [App\Http\Controllers\api\DepositeKelasControl
 //TiZIN INTRUKTUR
 Route::get('/ijininstruktur', [App\Http\Controllers\api\IjinInstrukturController::class, 'index']);
 Route::put('/ijininstruktur/{ID_JADWAL}', [App\Http\Controllers\api\IjinInstrukturController::class, 'update']);
+Route::post('/ijininstruktur/create', [App\Http\Controllers\api\IjinInstrukturController::class, 'store']);
+
+
+
+//Sistem Kontroller
+Route::put('/MendeaktifasiMember/{ID_USER}', [App\Http\Controllers\api\SistemController::class, 'MendeaktifasiMember']);
+Route::put('/ResetDepositeKelas/{ID_USER}', [App\Http\Controllers\api\SistemController::class, 'ResetDepositeKelas']);
+Route::get('/indexMendeaktifasiMember', [App\Http\Controllers\api\SistemController::class, 'indexMendeaktifasiMember']);
+Route::get('/indexResetDepositeKelas', [App\Http\Controllers\api\SistemController::class, 'indexResetDepositeKelas']);
+
+
+Route::post('/loginMobile', [App\Http\Controllers\Api\LoginMobileController::class, 'login']);

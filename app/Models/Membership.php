@@ -9,13 +9,14 @@ class Membership extends Model
 {
     use HasFactory;
     protected $table = 'membership';
-    protected $primaryKey = 'ID_MEMBERSHIP ';
+    protected $primaryKey = 'ID_MEMBERSHIP';
     public $incrementing = false;
     protected $keyType = 'string';
     public $timestamps = false;
     
     protected $fillable = [
-        'ID_MEMBERSHIP ',
+        'ID_MEMBERSHIP',
+        'NO_STRUK_MEMBERSHIP',
         'MEM_ID_USER',
         'ID_MEMBER',
         'PEG_ID_USER',

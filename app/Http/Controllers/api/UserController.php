@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\member;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -22,8 +23,6 @@ class UserController extends Controller
 
     public function login(Request $request){
         $loginData = $request->all();
-        
-
         $validate = Validator::make($loginData, [
             'EMAIL_USER' => 'required',
             'PASSWORD_USER' => 'required'
@@ -62,49 +61,17 @@ class UserController extends Controller
 
     public function updatePassword(Request $request,$ID_USER)
     {
-        // $newPasswordDefault = User::find($ID_USER);
-        // var_dump($newPasswordDefault);exit;
-        // $newPasswordDefault->PASSWORD_USER = $TANGGAL_LAHIR_USER;
-
-
-
         $input = $request->all();
         $newPasswordDefault = User::find($ID_USER);
+        $newMember = member::find($ID_USER);
+        if($newMember != NULL){
+            return;
+        }
+
         $newPasswordDefault->PASSWORD_USER = $request->input('PASSWORD_USER');
-        //$newInstruktur->USER_FOTO = $request->input('USER_FOTO');
 
         $newPasswordDefault->update();
         return response()->json($newPasswordDefault);
-
-        // $EMAIL_USER = $request->EMAIL_USER;
-        // $PASSWORD_USER = $request->PASSWORD_USER;
-        // $NewPassord = $request->NewPassword;
-        
-        // $user = User::where('EMAIL_USER', $EMAIL_USER)->where('PASSWORD_USER', $PASSWORD_USER)->first();
-        // if(!$user){
-            //     return response()->json(['message' => 'Password Lama Salah'], 400);
-            // }
-            // if($PASSWORD_USER == $NewPassord){
-                //     return response()->json(['message' => 'Password Baru Tidak Boleh Sama Dengan Password Lama'], 400);
-                // }
-                
-        // $input = $request->all();
-
-        // if($user!=null){
-        //     $user->PASSWORD_USER = $PASSWORD_USER;
-        //     User::where('EMAIL_USER', $EMAIL_USER)->update(['PASSWORD_USER' => $NewPassord]);
-        //     $New = User::where('EMAIL_USER', $EMAIL_USER)->first();
-        //     $response['message'] = "Update Password Berhasil";
-        //     $response['data'] = $New;
-        //     $response['status'] = true;
-        //     return response($response);
-        // }
-        // else{
-        //     $response['message'] = "Update Password Gagal";
-        //     $response['data'] = null;
-        //     $response['status'] = false;
-        //     return response($response);
-        // }  
     }
 
     /**
