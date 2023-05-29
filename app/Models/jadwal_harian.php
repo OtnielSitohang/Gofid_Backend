@@ -21,4 +21,10 @@ class jadwal_harian extends Model
         'HARI_JADWAL_HARIAN',
         'STATUS'
     ];
+
+    public function jadwal()
+    {
+        return $this->belongsTo(Jadwal::class, 'ID_JADWAL', 'ID_JADWAL');
+    }
+
 }

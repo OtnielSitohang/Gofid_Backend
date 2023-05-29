@@ -18,6 +18,7 @@ class instruktur extends Model
         'ID_USER',
         'ID_INSTRUKTUR',
         'DESKRIPSI_INSTRUKTUR',
+        'KETERLAMBATAN_INSTRUKTUR',
     ];
 
     // use SoftDeletes;

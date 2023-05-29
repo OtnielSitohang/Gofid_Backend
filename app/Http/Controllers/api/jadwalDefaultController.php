@@ -57,7 +57,6 @@ class jadwalDefaultController extends Controller
     
     public function store(Request $request){
 
-        
         $client = new Client();
         $data = $request->json()->all();
         $ID_JADWAL = $client->generateId($size = 21);
@@ -122,6 +121,16 @@ class jadwalDefaultController extends Controller
         $newJadwal->update();
         $newJadwalDefault->update();
         return response()->json($newJadwal);
+    }
+
+
+    public function getJadwalMobile(){
+        $jadwal = jadwal_default::orderByRaw("FIELD(HARI_JADWAL_DEFAULT, '1', '2', '3', '4', '5', '6', '7')")
+        ->with(['jadwal'])
+        ->get();
+
+        return response(['data'=>$jadwal]);
+
     }
 
 }

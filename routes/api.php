@@ -58,6 +58,7 @@ Route::get('/jadwal', [App\Http\Controllers\api\jadwalController::class, 'index'
 
 //Jadwal Default
 Route::get('/jadwal_default', [App\Http\Controllers\api\jadwalDefaultController::class, 'index']);
+Route::get('/getJadwalMobile', [App\Http\Controllers\api\jadwalDefaultController::class, 'getJadwalMobile']);
 Route::delete('/jadwal_default/destroy/{ID_JADWAL}', [App\Http\Controllers\api\jadwalDefaultController::class, 'destroy']);
 Route::post('/jadwal_default/create', [App\Http\Controllers\api\jadwalDefaultController::class, 'store']);
 Route::put('/jadwal_default/update/{ID_JADWAL}', [App\Http\Controllers\api\jadwalDefaultController::class, 'update']);
@@ -103,4 +104,31 @@ Route::get('/indexMendeaktifasiMember', [App\Http\Controllers\api\SistemControll
 Route::get('/indexResetDepositeKelas', [App\Http\Controllers\api\SistemController::class, 'indexResetDepositeKelas']);
 
 
-Route::post('/loginMobile', [App\Http\Controllers\Api\LoginMobileController::class, 'login']);
+// Route::post('/loginMobile', [App\Http\Controllers\Api\LoginMobileController::class, 'login']);
+Route::post('/loginMobile2', [App\Http\Controllers\Api\LoginMobileController::class, 'login2']);
+
+
+//Presensi Member Gym
+Route::get('/presensiMemberGym', [App\Http\Controllers\Api\BookingGymController::class, 'index']);
+Route::put('/presensiMemberGym/{ID_USER}', [App\Http\Controllers\Api\BookingGymController::class, 'PresensiGym']);
+Route::put('/cancelBookingGym/{ID_BOOKING_PRESENSI_GYM}', [App\Http\Controllers\Api\BookingGymController::class, 'cancelBookingGym']);
+
+
+//Presensi Kelas Reguler
+Route::get('/presensiKelas', [App\Http\Controllers\Api\BookingKelasController::class, 'index']);
+Route::put('/presensiKelas/{ID_BOOKING_KELAS}', [App\Http\Controllers\Api\BookingKelasController::class, 'PresensiKelas']);
+
+
+//Presensi Kelas Paket
+Route::get('/presensiKelasPaket', [App\Http\Controllers\Api\BookingKelasRegulerController::class, 'indexDepositeKelas']);
+Route::put('/presensiKelasPaket/{ID_BOOKING_KELAS}', [App\Http\Controllers\Api\BookingKelasRegulerController::class, 'PresensiKelas']);
+
+
+//HisotryMember
+Route::get('/indexHistoryMemberGym/{ID_MEMBER}', [App\Http\Controllers\Api\HistoryMemberController::class, 'indexHistoryMemberGym']);
+Route::get('/indexHistoryMemberKelas/{ID_MEMBER}', [App\Http\Controllers\Api\HistoryMemberController::class, 'indexHistoryMemberKelas']);
+// Route::put('/presensiKelasPaket/{ID_BOOKING_KELAS}', [App\Http\Controllers\Api\HistoryMemberController::class, 'PresensiKelas']);
+
+
+//HisotryInstruktur
+Route::get('/indexHistoryInstruktur/{ID_INSTRUKTUR}', [App\Http\Controllers\Api\HistoryInstrukturController::class, 'indexHistoryInstruktur']);

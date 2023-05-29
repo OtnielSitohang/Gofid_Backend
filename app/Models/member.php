@@ -20,5 +20,8 @@ class member extends Model
         'ALAMAT_MEMBER',
         'TELEPON_MEMBER',
         'SISA_DEPOSIT_MEMBER',
+        'TANGGAL_KADALUARSA_MEMBERSHIP',
+        'TOTAL_KELAS',
+        'ID_KELAS',
     ];
 }

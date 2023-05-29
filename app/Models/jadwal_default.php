@@ -19,4 +19,10 @@ class jadwal_default extends Model
         'ID_JADWAL_DEFAULT',
         'HARI_JADWAL_DEFAULT',
     ];
+
+    public function jadwal()
+    {
+        return $this->belongsTo(jadwal::class, 'ID_JADWAL', 'ID_JADWAL');
+
+    }
 }
