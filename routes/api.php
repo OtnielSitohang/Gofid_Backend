@@ -132,3 +132,7 @@ Route::get('/indexHistoryMemberKelas/{ID_MEMBER}', [App\Http\Controllers\Api\His
 
 //HisotryInstruktur
 Route::get('/indexHistoryInstruktur/{ID_INSTRUKTUR}', [App\Http\Controllers\Api\HistoryInstrukturController::class, 'indexHistoryInstruktur']);
+
+
+//LaporanAktivasiKelasBulanan 
+Route::get('/LaporanAktivasiKelasBulanan/{ID_INSTRUKTUR}', [App\Http\Controllers\Api\LaporanController::class, 'LaporanAktivasiKelasBulanan']);
