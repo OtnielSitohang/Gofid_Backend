@@ -21,7 +21,6 @@ class jadwal extends Model
     protected $fillable = [
         'ID_JADWAL',
         'ID_KELAS',
-        'JAD_ID_JADWAL',
         'ID_USER',
         'ID_INSTRUKTUR',
         'SESI_JADWAL',

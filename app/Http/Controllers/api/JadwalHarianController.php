@@ -108,4 +108,62 @@ class JadwalHarianController extends Controller
     }
 
 
+    public function GetJadwalByIns(Request $request, $ID_INSTRUKTUR){
+        $startDate = date('Y-m-d 00:00:00', strtotime('this week'));
+        $endDate = date('Y-m-d 23:59:59', strtotime('this week +6 days'));
+
+        $jadwal_harian = jadwal_harian::join('jadwal', 'jadwal_harian.ID_JADWAL', '=' , 'jadwal.ID_JADWAL')
+            ->join('user' , 'user.ID_USER', '=' , 'jadwal.ID_USER')
+            ->join('kelas' , 'kelas.ID_KELAS', '=' , 'jadwal.ID_KELAS')
+            ->where('IS_DELETED_JADWAL', NULL)
+            ->whereBetween('TANGGAL_JADWAL_HARIAN', [$startDate, $endDate])
+            ->where(function ($query) use ($ID_INSTRUKTUR) {
+                $query->where('ID_INSTRUKTUR', $ID_INSTRUKTUR)
+                    ->orWhere('ID_INSTRUKTUR_PENGGANTI', $ID_INSTRUKTUR);
+            })
+            ->get();
+
+
+
+        if(count($jadwal_harian) > 0)
+        {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Data Jadwal Berhasil Ditampilkan',
+                'data' => $jadwal_harian
+            ], 200);
+        }
+
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Data Jadwal Kosong',
+            'data' => null
+        ], 404);
+    }
+
+
+    public function cekInstrukturPengganti(Request $request,  $ID_INSTRUKTUR) {
+        $instrukturKosong = jadwal::join('instruktur', 'jadwal.ID_INSTRUKTUR', '=', 'instruktur.ID_INSTRUKTUR')
+        ->join('user' , 'user.ID_USER' , '=' , 'jadwal.ID_USER')
+        ->join('jadwal_harian' , 'jadwal_harian.ID_JADWAL' , '=' , 'jadwal.ID_JADWAL')
+            ->where('jadwal.ID_INSTRUKTUR', '!=', $ID_INSTRUKTUR)
+            ->where('HARI_JADWAL_HARIAN', '!=' ,  $request->hariJadwal)
+            ->where('SESI_JADWAL', '!=', $request->sesiJadwal)
+            ->get(['instruktur.ID_INSTRUKTUR', 'instruktur.ID_USER', 'user.NAMA_USER']);
+    
+        return $instrukturKosong;
+    }
+    
+    // public function cekInstrukturPengganti($ID_INSTRUKTUR, $HARI_JADWAL_HARIAN, $SESI_JADWAL) {
+    //     $instrukturKosong = jadwal_harian::join('instruktur', 'jadwal_harian.ID_INSTRUKTUR', '=', 'instruktur.ID_INSTRUKTUR')
+    //         ->where('instruktur.ID_INSTRUKTUR', '!=', $ID_INSTRUKTUR)
+    //         ->where('jadwal_harian.HARI_JADWAL_HARIAN', $HARI_JADWAL_HARIAN)
+    //         ->where('jadwal_harian.SESI_JADWAL', $SESI_JADWAL)
+    //         ->get(['instruktur.ID_INSTRUKTUR', 'instruktur.NAMA_INSTRUKTUR']);
+    
+    //     return $instrukturKosong;
+    // }
+    
+
+
 }

@@ -21,7 +21,6 @@ class ijininstruktur extends Model
         'ID_INSTRUKTUR_PENGGANTI',
         'INS_PENGGANTI_ID_USER',
         'ID_JADWAL',
-        'HARI_IZIN',
         'TANGGAL_IZIN',
         'TANGGAL_PENGAJUAN_IZIN',
         'SESI_IZIN',
@@ -47,6 +46,11 @@ class ijininstruktur extends Model
     public function InstrukturPenggantiUserName()
     {
         return $this->belongsTo(User::class, 'INS_PENGGANTI_ID_USER', 'ID_USER');
+
+    }
+    public function jadwal()
+    {
+        return $this->belongsTo(jadwal::class, 'ID_JADWAL', 'ID_JADWAL');
 
     }
 }

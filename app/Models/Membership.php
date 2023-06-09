@@ -23,5 +23,6 @@ class Membership extends Model
         'ID_PEGAWAI',
         'TANGGAL_AKTIVASI_MEMBERSHIP',
         'TANGGAL_KADALUARSA_MEMBERSHIP',
+        'TOTAL_HARGA_AKTIVASI',
     ];
 }

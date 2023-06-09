@@ -24,6 +24,7 @@ class booking_gym extends Model
         'STATUS_PRESENSI',
         'IS_CANCELED',
         'SESI_BOOKING_GYM',
+        'WAKTU_PRESENSI',
     ];
 
 

@@ -19,7 +19,13 @@ class jadwal_harian extends Model
         'ID_JADWAL_HARIAN',
         'TANGGAL_JADWAL_HARIAN',
         'HARI_JADWAL_HARIAN',
-        'STATUS'
+        'STATUS',
+        'WAKTU_MULAI',
+        'WAKTU_SELESAI',
+        'ID_INSTRUKTUR_PENGGANTI',
+        'ID_USER_PENGGANTI ',
+        'ID_IZIN',
+        'STATUS_IZIN',
     ];
 
     public function jadwal()

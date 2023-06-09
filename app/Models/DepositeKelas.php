@@ -28,6 +28,7 @@ class DepositeKelas extends Model
         'TOTAL_KELAS',
         'STATUS_PRESENSI',
         'BONUS_DEPOSIT_KELAS',
+        'TOTAL_HARGA_DEPOSITE_KELAS',
     ];
 
     

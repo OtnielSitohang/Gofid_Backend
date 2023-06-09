@@ -65,6 +65,8 @@ Route::put('/jadwal_default/update/{ID_JADWAL}', [App\Http\Controllers\api\jadwa
 
 //Jadwal Harian
 Route::get('/jadwalHarian', [App\Http\Controllers\api\JadwalHarianController::class, 'index']);
+Route::get('/cekInstrukturPengganti/{ID_INSTRUKTUR}', [App\Http\Controllers\api\JadwalHarianController::class, 'cekInstrukturPengganti']);
+Route::get('/GetJadwalByIns/{ID_INSTRUKTUR}', [App\Http\Controllers\api\JadwalHarianController::class, 'GetJadwalByIns']);
 Route::put('jadwalHarian/update/{ID_JADWAL}', [App\Http\Controllers\api\JadwalHarianController::class, 'updateToHoliday']);
 Route::post('/jadwalHariangenerate', [App\Http\Controllers\api\JadwalHarianController::class, 'storeMax']);
 
@@ -90,8 +92,9 @@ Route::get('/indexDepositeUang', [App\Http\Controllers\api\DepositUangController
 Route::post('/depositeKelas/store', [App\Http\Controllers\api\DepositeKelasController::class, 'store']);
 Route::get('/indexDepositeKelas', [App\Http\Controllers\api\DepositeKelasController::class, 'index']);
 
-//TiZIN INTRUKTUR
+//iZIN INTRUKTUR
 Route::get('/ijininstruktur', [App\Http\Controllers\api\IjinInstrukturController::class, 'index']);
+Route::get('/showIzinByID/{ID_INSTRUKTUR}', [App\Http\Controllers\api\IjinInstrukturController::class, 'showIzinByID']);
 Route::put('/ijininstruktur/{ID_JADWAL}', [App\Http\Controllers\api\IjinInstrukturController::class, 'update']);
 Route::post('/ijininstruktur/create', [App\Http\Controllers\api\IjinInstrukturController::class, 'store']);
 
@@ -105,7 +108,7 @@ Route::get('/indexResetDepositeKelas', [App\Http\Controllers\api\SistemControlle
 
 
 // Route::post('/loginMobile', [App\Http\Controllers\Api\LoginMobileController::class, 'login']);
-Route::post('/loginMobile2', [App\Http\Controllers\Api\LoginMobileController::class, 'login2']);
+Route::post('/loginMobile2', [App\Http\Controllers\api\LoginMobileController::class, 'login2']);
 
 
 //Presensi Member Gym
@@ -136,3 +139,7 @@ Route::get('/indexHistoryInstruktur/{ID_INSTRUKTUR}', [App\Http\Controllers\Api\
 
 //LaporanAktivasiKelasBulanan 
 Route::get('/LaporanAktivasiKelasBulanan/{ID_INSTRUKTUR}', [App\Http\Controllers\Api\LaporanController::class, 'LaporanAktivasiKelasBulanan']);
+Route::get('/LaporanAktivasiGymBulanan/{ID_INSTRUKTUR}', [App\Http\Controllers\Api\LaporanController::class, 'LaporanAktivasiGymBulanan']);
+Route::get('/LaporanAktivitasGYMBulanan2', [App\Http\Controllers\Api\LaporanController::class, 'LaporanAktivitasGYMBulanan2']);
+Route::get('/LaporanPendapatan', [App\Http\Controllers\Api\LaporanController::class, 'LaporanPendapatan']);
+Route::get('/LaporanInstruktur', [App\Http\Controllers\Api\LaporanController::class, 'LaporanInstruktur']);
