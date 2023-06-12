@@ -9,7 +9,7 @@ class member extends Model
 {
     use HasFactory;
     protected $table = 'member';
-    protected $primaryKey = 'ID_USER';
+    protected $primaryKey = 'ID_MEMBER';
     public $incrementing = false;
     protected $keyType = 'string';
     public $timestamps = false;
@@ -22,6 +22,8 @@ class member extends Model
         'SISA_DEPOSIT_MEMBER',
         'TANGGAL_KADALUARSA_MEMBERSHIP',
         'TOTAL_KELAS',
+        'TEMP_UANG',
+        'TEMP_PAKET',
         'ID_KELAS',
     ];
 }

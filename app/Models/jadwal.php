@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\KELAS;
 use App\Models\jadwal_harian;
+use App\Models\ijininstruktur;
 
 
 class jadwal extends Model

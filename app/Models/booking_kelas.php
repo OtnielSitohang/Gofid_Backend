@@ -23,7 +23,7 @@ class booking_kelas extends Model
         'TANGGAL_KELAS',
         'STATUS_PRESENSI',
         'IS_CANCELED',
-        'SESI_BOOKING_GYM',
+        'SESI_BOOKING_KELAS',
         'TANGGAL_BOOKING_KELAS',
     ];
 

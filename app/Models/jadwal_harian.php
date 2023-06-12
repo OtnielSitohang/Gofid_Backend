@@ -9,7 +9,8 @@ class jadwal_harian extends Model
 {
     use HasFactory;
     protected $table = 'jadwal_harian';
-    protected $primaryKey = 'ID_JADWAL';
+    protected $primaryKey = 'ID_JADWAL_HARIAN';
+    // protected $primaryKey = 'ID_JADWAL';
     public $incrementing = false;
     protected $keyType = 'string';
     public $timestamps = false;
@@ -20,6 +21,7 @@ class jadwal_harian extends Model
         'TANGGAL_JADWAL_HARIAN',
         'HARI_JADWAL_HARIAN',
         'STATUS',
+        'SLOT_KELAS',
         'WAKTU_MULAI',
         'WAKTU_SELESAI',
         'ID_INSTRUKTUR_PENGGANTI',
@@ -32,5 +34,11 @@ class jadwal_harian extends Model
     {
         return $this->belongsTo(Jadwal::class, 'ID_JADWAL', 'ID_JADWAL');
     }
+
+    public function ijininstruktur()
+    {
+        return $this->belongsTo(ijininstruktur::class, 'ID_IZIN', 'ID_IZIN');
+    }
+
 
 }

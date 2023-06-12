@@ -99,7 +99,7 @@ class IjinInstrukturController extends Controller
     public function showIzinByID($ID_INSTRUKTUR)
     {
         $ijininstruktur = IjinInstruktur::with(['instruktur', 'InstrukturUserName', 'InstrukturPengganti', 'InstrukturPenggantiUserName'])
-            ->join('jadwal', 'jadwal.ID_JADWAL', '=', 'IjinInstruktur.ID_JADWAL')
+        ->join('jadwal', 'jadwal.ID_JADWAL', '=', 'IjinInstruktur.ID_JADWAL')
             ->join('kelas', 'kelas.ID_KELAS', 'jadwal.ID_KELAS')
             ->where('IjinInstruktur.ID_INSTRUKTUR', $ID_INSTRUKTUR)
             ->get();

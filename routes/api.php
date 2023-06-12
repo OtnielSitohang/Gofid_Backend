@@ -69,6 +69,10 @@ Route::get('/cekInstrukturPengganti/{ID_INSTRUKTUR}', [App\Http\Controllers\api\
 Route::get('/GetJadwalByIns/{ID_INSTRUKTUR}', [App\Http\Controllers\api\JadwalHarianController::class, 'GetJadwalByIns']);
 Route::put('jadwalHarian/update/{ID_JADWAL}', [App\Http\Controllers\api\JadwalHarianController::class, 'updateToHoliday']);
 Route::post('/jadwalHariangenerate', [App\Http\Controllers\api\JadwalHarianController::class, 'storeMax']);
+Route::get('/getDataHariini', [App\Http\Controllers\api\JadwalHarianController::class, 'getDataHariini']);
+Route::put('/UpdateJadwalMulai/{ID_JADWAL_HARIAN}', [App\Http\Controllers\api\JadwalHarianController::class, 'UpdateJadwalMulai']);
+Route::put('/UpdateJadwalSelesai/{ID_JADWAL_HARIAN}', [App\Http\Controllers\api\JadwalHarianController::class, 'UpdateJadwalSelesai']);
+Route::get('/GetDataInsToday/{ID_INSTRUKTUR}', [App\Http\Controllers\api\JadwalHarianController::class, 'GetDataInsToday']);
 
 
 //Kelas
@@ -120,6 +124,14 @@ Route::put('/cancelBookingGym/{ID_BOOKING_PRESENSI_GYM}', [App\Http\Controllers\
 //Presensi Kelas Reguler
 Route::get('/presensiKelas', [App\Http\Controllers\Api\BookingKelasController::class, 'index']);
 Route::put('/presensiKelas/{ID_BOOKING_KELAS}', [App\Http\Controllers\Api\BookingKelasController::class, 'PresensiKelas']);
+Route::get('/ShowBookingByIDMEMBER/{ID_MEMBER}', [App\Http\Controllers\Api\BookingKelasController::class, 'ShowBookingByIDMEMBER']);
+// Route::post('/CancelBooking/{ID_BOOKING_KELAS}', [App\Http\Controllers\Api\BookingKelasController::class, 'CancelBooking']);
+Route::post('/CancelBooking/{ID_BOOKING_KELAS}/{ID_JADWAL_HARIAN}', [App\Http\Controllers\Api\BookingKelasController::class, 'CancelBooking']);
+Route::post('/CreateBooking', [App\Http\Controllers\Api\BookingKelasController::class, 'CreateBooking']);
+Route::post('/GetJadwalHarianBelumdiBook', [App\Http\Controllers\Api\BookingKelasController::class, 'GetJadwalHarianBelumdiBook']);
+Route::put('/PresensiMemberKelasHadir/{ID_JADWAL_HARIAN}/{ID_MEMBER}', [App\Http\Controllers\Api\BookingKelasController::class, 'PresensiMemberKelasHadir']);
+Route::put('/PresensiMemberKelasTidakHadir/{ID_JADWAL_HARIAN}/{ID_MEMBER}', [App\Http\Controllers\Api\BookingKelasController::class, 'PresensiMemberKelasTidakHadir']);
+Route::post('/GetPresensiKelas/{ID_JADWAL_HARIAN}/{ID_INSTRUKTUR}', [App\Http\Controllers\Api\BookingKelasController::class, 'GetPresensiKelas']);
 
 
 //Presensi Kelas Paket
