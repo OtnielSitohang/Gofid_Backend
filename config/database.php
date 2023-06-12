@@ -46,8 +46,8 @@ return [
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', 'containers-us-west-10.railway.app:7514'),
-            'port' => env('DB_PORT', '3306'),
+            'host' => env('DB_HOST', 'containers-us-west-10.railway.app'),
+            'port' => env('DB_PORT', '7514'),
             'database' => env('DB_DATABASE', 'railway'),
             'username' => env('DB_USERNAME', 'root'),
             'password' => env('DB_PASSWORD', 'i6XEMod8pAS7JfdQnfKh'),
